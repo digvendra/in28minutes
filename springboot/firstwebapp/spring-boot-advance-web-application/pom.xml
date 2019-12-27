@@ -6,13 +6,42 @@
   <name>spring-boot-advance-web-application</name>
   <description>Demo project for Spring Boot Advance</description>
   
+  <parent>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>2.2.0.RELEASE</version>
+	<relativePath/> <!-- lookup parent from repository -->
+  </parent>
+	
   <properties>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
-    <resource.delimiter>@</resource.delimiter>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
   
+  <dependencies>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-devtools</artifactId>
+		<scope>runtime</scope>
+		<optional>true</optional>
+	</dependency>
+	<dependency>
+           <groupId>org.apache.tomcat.embed</groupId>
+           <artifactId>tomcat-embed-jasper</artifactId>
+           <scope>provided</scope>
+     </dependency>
+  </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
