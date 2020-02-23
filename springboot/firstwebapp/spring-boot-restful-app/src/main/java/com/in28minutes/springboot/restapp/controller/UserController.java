@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,5 +45,17 @@ public class UserController {
 		User newUser = userService.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUser.getId()).toUri();
 		return ResponseEntity.created(location).build();
+	}
+	
+	@GetMapping(path = "/users/hateoas/{userId}")
+	public EntityModel<User> getUserHateoas(@PathVariable Integer userId) {
+		User user = userService.findOne(userId);
+		if(user == null) {
+			throw new UserNotFound("User with Id " + userId + " Not Found");
+		}
+		
+		WebMvcLinkBuilder linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
+		EntityModel<User> model = new EntityModel<User>(user, linkTo.withRel("all-users"));
+		return model;
 	}
 }
