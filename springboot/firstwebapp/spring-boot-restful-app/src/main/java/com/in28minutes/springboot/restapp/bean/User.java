@@ -2,10 +2,13 @@ package com.in28minutes.springboot.restapp.bean;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class User {
 
 	private Integer id;
 	
+	@Size( min = 2)
 	private String name;
 	
 	private Date dateOfBirth;
